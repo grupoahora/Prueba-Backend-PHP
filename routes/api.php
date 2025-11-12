@@ -25,3 +25,5 @@ Route::post('/bodegas', [BodegaController::class, 'store']);
 use App\Http\Controllers\ProductoController;
 
 Route::get('/productos/total-desc', [ProductoController::class, 'indexTotalDesc']);
+
+Route::post('/productos', [ProductoController::class, 'store']);
