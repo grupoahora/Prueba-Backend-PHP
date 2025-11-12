@@ -86,8 +86,8 @@ class ProductoController extends Controller
                 'cantidad' => $cantidadInicial,
                 'id_bodega_destino' => $bodega->id,
                 'id_inventario' => $inventarioId,
-                'created_by' => null, // O el ID del usuario autenticado si aplica
-                'updated_by' => null,
+                'created_by' => auth()->user()->id, // O el ID del usuario autenticado si aplica
+                'updated_by' => auth()->user()->id,
             ]);
         });
 
