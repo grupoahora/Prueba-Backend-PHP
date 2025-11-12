@@ -1,64 +1,227 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Proyecto Backend PHP - Laravel
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Este es un proyecto de backend desarrollado con el framework Laravel. A continuación, se detallan las instrucciones para desplegar y configurar el proyecto.
 
-## About Laravel
+## Requisitos Previos
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Antes de comenzar, asegúrate de tener instalados los siguientes componentes:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- **PHP**: Versión 7.3 o superior (recomendado: 8.*)
+- **Composer**: Administrador de dependencias para PHP
+- **Node.js**: Para gestión de assets front-end (opcional, si usas Laravel Mix)
+- **Base de datos**: MySQL, PostgreSQL, SQLite o cualquier base de datos soportada por Laravel
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Instalación
 
-## Learning Laravel
+### 1. Clonar el repositorio
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+```bash
+git clone <URL-del-repositorio>
+cd Prueba-Backend-PHP
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 2. Instalar dependencias de PHP
 
-## Laravel Sponsors
+Ejecuta el siguiente comando para instalar todas las dependencias definidas en `composer.json`:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+```bash
+composer install
+```
 
-### Premium Partners
+Este comando instalará los siguientes paquetes principales:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+#### Dependencias de Producción:
+- `php`: ^7.3|^8.0
+- `fruitcake/laravel-cors`: ^2.0 (Para manejo de CORS)
+- `guzzlehttp/guzzle`: ^7.0.1 (Cliente HTTP)
+- `laravel/framework`: ^8.75 (Framework Laravel)
+- `laravel/tinker`: ^2.5 (Consola interactiva)
 
-## Contributing
+#### Dependencias de Desarrollo:
+- `facade/ignition`: ^2.5 (Página de errores mejorada)
+- `fakerphp/faker`: ^1.9.1 (Generación de datos falsos)
+- `laravel/sail`: ^1.0.1 (Entorno de desarrollo Docker)
+- `mockery/mockery`: ^1.4.4 (Framework de mock para pruebas)
+- `nunomaduro/collision`: ^5.10 (Mejor salida de errores en consola)
+- `phpunit/phpunit`: ^9.5.10 (Framework de pruebas unitarias)
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 3. Configurar el entorno
 
-## Code of Conduct
+Copia el archivo de configuración de ejemplo:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+cp .env.example .env
+```
 
-## Security Vulnerabilities
+Edita el archivo `.env` para configurar:
+- Conexión a la base de datos (DB_CONNECTION, DB_HOST, DB_PORT, DB_DATABASE, DB_USERNAME, DB_PASSWORD)
+- APP_KEY (generar con `php artisan key:generate`)
+- Otras configuraciones específicas del proyecto
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 4. Generar clave de aplicación
 
-## License
+```bash
+php artisan key:generate
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 5. Ejecutar migraciones de base de datos
+
+```bash
+php artisan migrate
+```
+
+Si deseas poblar la base de datos con datos de prueba:
+
+```bash
+php artisan db:seed
+```
+
+
+
+## Estructura del Proyecto
+
+- `app/`: Código de la aplicación
+  - `Http/Controllers/`: Controladores (ProductoController, InventarioController, BodegaController)
+  - `Models/`: Modelos Eloquent (Producto, Inventario, Bodega, Historiale, User)
+- `database/migrations/`: Migraciones de base de datos
+- `database/seeders/`: Seeders para poblar datos
+- `routes/api.php`: Definición de rutas API
+- `config/`: Archivos de configuración
+
+## Funcionalidades Principales
+
+Este proyecto implementa un sistema completo de gestión de inventario que permite:
+
+### Gestión de Productos
+- **Crear productos**: Permite crear nuevos productos con descripción y asignar una cantidad inicial automáticamente a la "Bodega General".
+- **Listar productos**: Obtiene la lista de productos activos ordenados por el total de inventario descendente, incluyendo el total acumulado en todas las bodegas.
+
+### Gestión de Inventarios
+- **Agregar inventario**: Permite añadir cantidades adicionales de un producto existente a una bodega específica.
+- **Transferir inventario**: Facilita el traslado de productos entre diferentes bodegas, validando la disponibilidad en el origen y actualizando ambos inventarios.
+
+### Gestión de Bodegas
+- **Crear bodegas**: Permite registrar nuevas bodegas con información de responsable y estado.
+- **Listar bodegas**: Obtiene todas las bodegas ordenadas alfabéticamente.
+
+### Historial de Operaciones
+- Registra automáticamente todas las operaciones de creación, actualización y transferencia de inventario para auditoría y seguimiento.
+
+## API Endpoints
+
+### Endpoints Disponibles
+
+#### Bodegas
+- **GET /api/bodegas**
+  - Lista todas las bodegas ordenadas por nombre.
+  - Respuesta: Array de objetos bodega con id, nombre, estado, etc.
+
+- **POST /api/bodegas**
+  - Crea una nueva bodega.
+  - Parámetros requeridos: `nombre` (string)
+  - Parámetros opcionales: `id_responsable` (integer), `estado` (string), `created_by` (integer), `updated_by` (integer)
+  - Ejemplo:
+    ```json
+    {
+      "nombre": "Bodega Norte",
+      "id_responsable": 1,
+      "estado": "activo"
+    }
+    ```
+
+#### Productos
+- **GET /api/productos/total-desc**
+  - Lista productos activos con el total de inventario acumulado, ordenado descendentemente.
+  - Respuesta: Array de productos con id, nombre, descripcion, estado, total.
+
+- **POST /api/productos**
+  - Crea un nuevo producto y asigna cantidad inicial a "Bodega General".
+  - Parámetros requeridos: `nombre` (string, máx. 50), `descripcion` (string, máx. 300), `cantidad_inicial` (integer, mínimo 0)
+  - Ejemplo:
+    ```json
+    {
+      "nombre": "Producto A",
+      "descripcion": "Descripción del producto A",
+      "cantidad_inicial": 100
+    }
+    ```
+
+#### Inventarios
+- **POST /api/inventarios**
+  - Agrega cantidad a un inventario existente o crea uno nuevo si no existe.
+  - Parámetros requeridos: `id_producto` (integer), `id_bodega` (integer), `cantidad` (integer, mínimo 1)
+  - Ejemplo:
+    ```json
+    {
+      "id_producto": 1,
+      "id_bodega": 2,
+      "cantidad": 50
+    }
+    ```
+
+- **POST /api/inventarios/transfer**
+  - Transfiere cantidad de un producto entre bodegas.
+  - Parámetros requeridos: `id_producto` (integer), `id_bodega_origen` (integer), `id_bodega_destino` (integer), `cantidad` (integer, mínimo 1)
+  - Validaciones: Origen y destino deben ser diferentes, cantidad suficiente en origen.
+  - Ejemplo:
+    ```json
+    {
+      "id_producto": 1,
+      "id_bodega_origen": 2,
+      "id_bodega_destino": 3,
+      "cantidad": 25
+    }
+    ```
+
+## Ejecución y Pruebas
+
+### 1. Ejecutar el servidor
+
+```bash
+php artisan serve
+```
+
+El servidor estará disponible en `http://localhost:8000` por defecto.
+
+### 2. Probar la API
+
+Puedes usar herramientas como Postman, Insomnia o curl para probar los endpoints.
+
+#### Ejemplo con curl - Crear un producto:
+```bash
+curl -X POST http://localhost:8000/api/productos \
+  -H "Content-Type: application/json" \
+  -d '{
+    "nombre": "Producto de Prueba",
+    "descripcion": "Descripción de prueba",
+    "cantidad_inicial": 10
+  }'
+```
+
+#### Ejemplo con curl - Listar productos:
+```bash
+curl -X GET http://localhost:8000/api/productos/total-desc
+```
+
+### 3. Base de datos de prueba
+
+Para poblar la base de datos con datos de prueba:
+
+```bash
+php artisan db:seed
+```
+
+Esto ejecutará todos los seeders disponibles en `database/seeders/` incluyendo BodegaSeeder, ProductoSeeder, InventarioSeeder y HistorialeSeeder.
+
+## Estructura de la Base de Datos
+
+- **bodegas**: Almacena información de las bodegas (id, nombre, id_responsable, estado)
+- **productos**: Contiene los productos (id, nombre, descripcion, estado)
+- **inventarios**: Registra las cantidades por producto y bodega (id, id_bodega, id_producto, cantidad)
+- **historiales**: Audita todas las operaciones (id, cantidad, id_bodega_origen, id_bodega_destino, id_inventario, created_by, updated_by)
+- **users**: Usuarios del sistema (proporcionado por Laravel)
+
+Todas las tablas incluyen campos de auditoría (created_by, updated_by, timestamps) y soft deletes.
+
+
+
