@@ -9,4 +9,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Bodega extends Model
 {
     use HasFactory, SoftDeletes;
+
+    protected $fillable = [
+        'nombre',
+        'id_responsable',
+        'estado',
+        'created_by',
+        'updated_by'
+    ];
 }

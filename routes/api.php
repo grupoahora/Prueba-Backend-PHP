@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BodegaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +18,10 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/bodegas', [BodegaController::class, 'index']);
+
+Route::post('/bodegas', [BodegaController::class, 'store']);
+use App\Http\Controllers\ProductoController;
+
+Route::get('/productos/total-desc', [ProductoController::class, 'indexTotalDesc']);
