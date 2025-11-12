@@ -25,6 +25,8 @@ class CreateHistorialesTable extends Migration
             $table->foreign('id_bodega_origen')->references('id')->on('bodegas')->nullOnDelete();
             $table->foreign('id_bodega_destino')->references('id')->on('bodegas')->nullOnDelete();
             $table->foreign('id_inventario')->references('id')->on('inventarios')->nullOnDelete();
+            $table->integer('created_by')->nullable();
+            $table->integer('updated_by')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
